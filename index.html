@@ -7,6 +7,10 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/select2/3.4.8/select2.css">
+    <script src="http://fb.me/react-with-addons-0.10.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.10.0.js"></script>
+    <script type="text/jsx" src="reactselect2.js"></script>
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -31,7 +35,9 @@
         <hr>
 
         <section id="main_content">
-          <p>Attempt to create a <a href="http://facebook.github.io/react/index.html">React</a> component around the <a href="http://ivaynberg.github.io/select2/">Select2</a> jQuery widget.</p>
+          <p>A <a href="http://facebook.github.io/react/index.html">React</a> component around the <a href="http://ivaynberg.github.io/select2/">Select2</a> jQuery widget.</p>
+          <div id="render_area">
+          </div>
         </section>
 
         <footer>
@@ -42,5 +48,9 @@
         
       </div>
     </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+  <script src="http://cdn.jsdelivr.net/select2/3.4.8/select2.js"></script>
+  <script type="text/jsx" src="demo.js"></script>
   </body>
 </html>
