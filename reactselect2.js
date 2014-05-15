@@ -178,12 +178,6 @@ var Select2Component = React.createClass({
       return true;
     }
 
-    // For now we'll use a prop to force an update if we know data is updated
-    // TODO: Remove this check once we implement more robust check
-    if (this.props._forceNewData) {
-      return true;
-    }
-
     return false;
   },
 
