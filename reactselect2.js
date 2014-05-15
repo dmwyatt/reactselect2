@@ -56,7 +56,7 @@ var Select2Component = React.createClass({
     if (this._isDataUpdated(prevProps.dataSet)) {
       // "brute-force" new data into our Select2 widget since Select2 doesn't
       // have a method for changng data on already-existing widgets
-      this.create();
+      this.createSelect2();
     } else {
       // Change placeholder
       if (prevProps.placeholder !== this.props.placeholder) {
@@ -91,14 +91,12 @@ var Select2Component = React.createClass({
 
   componentDidMount: function () {
     // Set up Select2
-    var $node = this.create();
+    var $node = this.createSelect2();
   },
-
 
   ///////////////////////////////
   // Manipulate Select2
   ///////////////////////////////
-
   setPlaceholderTo: function($elem, placeholder) {
     if (!placeholder) {
       placeholder = "";
@@ -120,7 +118,8 @@ var Select2Component = React.createClass({
     // ..Then put original data back
     $elem.select2("data", currData);
   },
-  create: function () {
+
+  createSelect2: function () {
     // Get inital value
     var val = null;
     if (this.props.val.length > 0) {
