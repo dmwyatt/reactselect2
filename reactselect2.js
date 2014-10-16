@@ -46,7 +46,7 @@ var Select2Component = React.createClass({
       styleWidth: "100%",
       enabled: true,
       dataSet: []
-    }
+    };
   },
 
   ///////////////////////////////
@@ -84,7 +84,7 @@ var Select2Component = React.createClass({
 
       // Enable/disable
       if (prevProps.enabled != this.props.enabled) {
-        this.getInputElem().select2("enable", this.props.enabled)
+        this.getInputElem().select2("enable", this.props.enabled);
       }
     }
   },
@@ -123,7 +123,7 @@ var Select2Component = React.createClass({
     // Get inital value
     var val = null;
     if (this.props.val.length > 0) {
-      val = this.props.multiple ? this.props.val : this.props.val[0]
+      val = this.props.multiple ? this.props.val : this.props.val[0];
     }
 
     var options = {
@@ -134,6 +134,7 @@ var Select2Component = React.createClass({
 
     var $node = this.getInputElem();
     $node.
+        val(val).
         select2(options).
         on("change", this.handleChange).
         on("select2-open", this.handleErrorState).
@@ -151,12 +152,12 @@ var Select2Component = React.createClass({
     if (this.props.hasError) {
       var hasErrorClass = $.inArray(this.props.errorClass, classNames);
 
-      if (hasErrorClass = -1) {
+      if (hasErrorClass == -1) {
         $dropNode.addClass(this.props.errorClass);
       }
 
     } else {
-      $dropNode.removeClass(this.props.errorClass)
+      $dropNode.removeClass(this.props.errorClass);
     }
   },
 
