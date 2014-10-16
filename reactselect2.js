@@ -134,6 +134,7 @@ var Select2Component = React.createClass({
 
     var $node = this.getInputElem();
     $node.
+        val(val).
         select2(options).
         on("change", this.handleChange).
         on("select2-open", this.handleErrorState).
