@@ -151,7 +151,7 @@ var Select2Component = React.createClass({
     if (this.props.hasError) {
       var hasErrorClass = $.inArray(this.props.errorClass, classNames);
 
-      if (hasErrorClass = -1) {
+      if (hasErrorClass == -1) {
         $dropNode.addClass(this.props.errorClass);
       }
 
