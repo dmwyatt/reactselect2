@@ -32,6 +32,7 @@ var Demo = React.createClass({
               placeholder="Select some options"
               multiple={true}
               styleWidth="25%"
+              val={[1, 3]}
           />
           {JSON.stringify(this.state.selections, undefined, 2)}
         </div>
