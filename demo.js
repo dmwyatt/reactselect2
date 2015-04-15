@@ -15,6 +15,14 @@ var Demo = React.createClass({
     })
   },
 
+  handleFormatResult: function (state) {
+    return state.text + " [available]";
+  },
+
+  handleFormatSelection: function(state) {
+    return state.text + " [selected]";
+  },
+
   render: function () {
     var data =[
       {id: 0, text: "Option 1"},
@@ -24,19 +32,21 @@ var Demo = React.createClass({
     ];
 
     return (
-        <div>
-          <Select2Component
-              id="the-hidden-input-id"
-              dataSet={data}
-              onSelection={this.handleSelections}
-              placeholder="Select some options"
-              multiple={true}
-              styleWidth="25%"
-              val={[1, 3]}
-          />
-          {JSON.stringify(this.state.selections, undefined, 2)}
-        </div>
-        );
+    <div>
+      <Select2Component
+        id="the-hidden-input-id"
+        dataSet={data}
+        onSelection={this.handleSelections}
+        placeholder="Select some options"
+        multiple={true}
+        styleWidth="25%"
+        val={[1, 3]}
+        onFormatResult={this.handleFormatResult}
+        onFormatSelection={this.handleFormatSelection}
+      />
+      {JSON.stringify(this.state.selections, undefined, 2)}
+    </div>
+    );
   }
 });
 

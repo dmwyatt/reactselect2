@@ -33,7 +33,13 @@ var Select2Component = React.createClass({
     styleWidth: React.PropTypes.string,
 
     // enable or disable the input
-    enabled: React.PropTypes.bool
+    enabled: React.PropTypes.bool,
+
+    // template function for rendering formatResult
+    onFormatResult: React.PropTypes.func,
+
+    // template function for rendering formatSelection
+    onFormatSelection: React.PropTypes.func
   },
 
   getDefaultProps: function () {
@@ -55,7 +61,7 @@ var Select2Component = React.createClass({
   componentDidUpdate: function (prevProps, prevState) {
     if (this._isDataUpdated(prevProps.dataSet)) {
       // "brute-force" new data into our Select2 widget since Select2 doesn't
-      // have a method for changng data on already-existing widgets
+      // have a method for changing data on already-existing widgets
       this.createSelect2();
     } else {
       // Change placeholder
@@ -126,19 +132,32 @@ var Select2Component = React.createClass({
       val = this.props.multiple ? this.props.val : this.props.val[0];
     }
 
+    var that = this;
     var options = {
       data: this.props.dataSet,
       multiple: this.props.multiple,
-      val: val
+      val: val,
+      formatResult: function(state) {
+        if(that.props.onFormatResult)
+          return that.props.onFormatResult(state);
+        else
+          return state.text;
+      },
+      formatSelection: function(state) {
+        if(that.props.onFormatSelection)
+          return that.props.onFormatSelection(state);
+        else
+          return state.text;
+      }
     };
 
     var $node = this.getInputElem();
     $node.
-        val(val).
-        select2(options).
-        on("change", this.handleChange).
-        on("select2-open", this.handleErrorState).
-        select2("enable", this.props.enabled);
+      val(val).
+      select2(options).
+      on("change", this.handleChange).
+      on("select2-open", this.handleErrorState).
+      select2("enable", this.props.enabled);
     this.setPlaceholderTo($node, this.props.placeholder);
   },
 
@@ -172,21 +191,20 @@ var Select2Component = React.createClass({
   },
 
   _isDataUpdated: function (oldData) {
-    // TODO: More robust dataSet checker.  Need to recurse and
-    // check all elements of data set.
-    if (oldData.length != this.props.dataSet.length) {
-      return true;
-    }
-
+    var tmp = [];
+    for(var i = 0; i < this.props.dataSet.length; i++)
+      tmp[this.props.dataSet[i].id] = true;
+    for(var i = 0; i < oldData.length; i++)
+      if(!tmp[oldData[i].id]) return true;
     return false;
   },
 
   render: function () {
     var style = {width: this.props.styleWidth};
     return (
-        <div className={this.props.hasError ? this.props.errorClass : ""}>
-          <input type='hidden' style={style} id={this.props.id}/>
-        </div>
-        );
+      <div className={this.props.hasError ? this.props.errorClass : ""}>
+        <input type='hidden' style={style} id={this.props.id}/>
+      </div>
+      );
   }
 });
